@@ -32,6 +32,9 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.8 "Karla",syst
 .s3{text-align:center}
 .s3 svg{width:64px;height:64px;color:var(--accent);margin-bottom:22px}
 .s3 p{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(23px,6vw,28px);line-height:1.4}
+.s3 .reply{font-style:italic;font-size:22px;color:var(--accent);margin-top:22px;min-height:32px;opacity:0;transition:opacity 1s ease}
+.s3 .reply.show{opacity:1}
+#yes.done{background:var(--accent);border-color:var(--accent);color:#fff}
 .nav{position:fixed;left:0;right:0;bottom:22px;display:flex;justify-content:center;align-items:center;gap:20px;transition:opacity .6s}
 .nav.hide{opacity:0;pointer-events:none}
 .nav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:18px;cursor:pointer}
@@ -68,6 +71,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.8 "Karla",syst
       <circle cx="32" cy="34" r="10"/>
     </svg>
     <p class="line" style="transition-delay:.9s">nanti setelah ujian bisa minta waktunya bentar buat foto? aku selalu ingin mengabadikan semua moment spesial sama kamu</p>
+    <button class="tap line" style="transition-delay:1.6s;margin-top:10px" id="yes">boleh dong</button>
+    <p class="reply" id="reply">yeay, sampai ketemu habis ujian ya</p>
   </section>
 </main>
 
@@ -91,6 +96,10 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.8 "Karla",syst
     prev.disabled=cur===0;next.disabled=cur===slides.length-1;
   };
   document.getElementById('tap').addEventListener('click',()=>go(1));
+  document.getElementById('yes').addEventListener('click',e=>{
+    e.currentTarget.classList.add('done');
+    document.getElementById('reply').classList.add('show');
+  });
   prev.addEventListener('click',()=>go(cur-1));
   next.addEventListener('click',()=>go(cur+1));
   addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
