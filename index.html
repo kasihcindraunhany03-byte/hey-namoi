@@ -11,7 +11,7 @@
 :root{--bg:#eef3fa;--ink:#16294a;--soft:#5b7299;--line:#b9c8de;--accent:#2f5fa8}
 *{box-sizing:border-box;min-width:0}
 html,body{height:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.8 "Karla",system-ui,sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
+body{margin:0;touch-action:pan-y;user-select:none;-webkit-user-select:none;background:var(--bg);color:var(--ink);font:16.5px/1.8 "Karla",system-ui,sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
 .stage{position:relative;z-index:1;height:100%;display:grid;place-items:center;padding:32px 24px 90px}
 .slide{grid-area:1/1;width:min(480px,100%);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity 1s ease,transform 1s ease,visibility 0s 1s}
 .slide.on{opacity:1;visibility:visible;transform:none;transition:opacity 1s ease,transform 1s ease}
@@ -125,9 +125,21 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.8 "Karla",syst
   prev.addEventListener('click',()=>go(cur-1));
   next.addEventListener('click',()=>go(cur+1));
   addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
-  let sx=null;
-  addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
-  addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>60&&cur>0)go(cur+(dx<0?1:-1))});
+  let sx=null,sy=null;
+  const start=(x,y)=>{sx=x;sy=y};
+  const end=(x,y)=>{
+    if(sx===null)return;const dx=x-sx,dy=y-sy;sx=null;
+    if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))go(cur+(dx<0?1:-1));
+  };
+  addEventListener('touchstart',e=>start(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
+  addEventListener('touchend',e=>end(e.changedTouches[0].clientX,e.changedTouches[0].clientY));
+  addEventListener('mousedown',e=>start(e.clientX,e.clientY));
+  addEventListener('mouseup',e=>end(e.clientX,e.clientY));
+  let wl=0;
+  addEventListener('wheel',e=>{
+    if(Math.abs(e.deltaX)<30||Math.abs(e.deltaX)<Math.abs(e.deltaY))return;
+    const t=Date.now();if(t-wl<700)return;wl=t;go(cur+(e.deltaX>0?1:-1));
+  },{passive:true});
 }
 </script>
 </body>
