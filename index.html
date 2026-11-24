@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hey namoi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Karla:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef3fa;--ink:#16294a;--soft:#5b7299;--line:#b9c8de;--accent:#2f5fa8}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.8 "Karla",system-ui,sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
+.stage{height:100%;display:grid;place-items:center;padding:32px 24px 90px}
+.slide{grid-area:1/1;width:min(480px,100%);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity 1s ease,transform 1s ease,visibility 0s 1s}
+.slide.on{opacity:1;visibility:visible;transform:none;transition:opacity 1s ease,transform 1s ease}
+.serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500}
+.s1{text-align:center}
+.s1 small{display:block;color:var(--soft);font-size:15px;letter-spacing:.04em;margin-bottom:4px}
+.s1 h1{font-size:clamp(52px,15vw,80px);line-height:1;margin:0;font-style:italic}
+.rule{width:40px;height:1px;background:var(--line);margin:28px auto}
+.tap{background:none;border:1px solid var(--line);color:var(--ink);font:500 15px "Karla",sans-serif;padding:12px 26px;border-radius:40px;cursor:pointer;min-height:44px;transition:background .3s,border-color .3s}
+.tap:hover{background:#fff;border-color:var(--accent)}
+.tap:focus-visible,.nav button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.s2 p,.s3 p{margin:0 0 16px}
+.s2 .first{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(26px,7vw,32px);line-height:1.25;margin-bottom:22px}
+.s2 .end{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:26px;color:var(--accent);margin-top:26px}
+.scroll-box{max-height:calc(100dvh - 160px);overflow-y:auto;padding-right:4px}
+.line{opacity:0;transform:translateY(6px);transition:opacity .9s ease,transform .9s ease}
+.on .line{opacity:1;transform:none}
+.s3{text-align:center}
+.s3 svg{width:64px;height:64px;color:var(--accent);margin-bottom:22px}
+.s3 p{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(23px,6vw,28px);line-height:1.4}
+.nav{position:fixed;left:0;right:0;bottom:22px;display:flex;justify-content:center;align-items:center;gap:20px;transition:opacity .6s}
+.nav.hide{opacity:0;pointer-events:none}
+.nav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:18px;cursor:pointer}
+.nav button[disabled]{opacity:.3;cursor:default}
+.dots{display:flex;gap:8px}
+.dots i{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .4s}
+.dots i.on{background:var(--accent)}
+@media(prefers-reduced-motion:reduce){.slide,.line{transition:opacity .3s;transform:none}}
+</style>
+</head>
+<body>
+<main class="stage">
+  <section class="slide s1 on">
+    <small>hey</small>
+    <h1 class="serif">namoi</h1>
+    <div class="rule"></div>
+    <button class="tap" id="tap">tap for love</button>
+  </section>
+
+  <section class="slide s2">
+    <div class="scroll-box">
+      <p class="first line" style="transition-delay:.3s">semangat ya sempronya besok sayang</p>
+      <p class="line" style="transition-delay:1s">semoga dilancarkan, nilainya bagus, dilembutkan hati dosjinya. aku percaya kamu keren dan pasti bisa banget ngelewatinya</p>
+      <p class="line" style="transition-delay:1.8s">terimakasih ya selama ini udah berusaha menyelesaikan proposal skripsimu, walaupun banyak hal yang harus kamu kerjakan, tapi kamu bisa lewatin</p>
+      <p class="line" style="transition-delay:2.6s">ga kerasa ya, ternyata udah ditahap ini, aku bersyukur karna ngelewatinnya bareng kamu</p>
+      <p class="line" style="transition-delay:3.3s">makasih sudah ada dihidupku, namoi</p>
+      <p class="end line" style="transition-delay:4.1s">i love u</p>
+    </div>
+  </section>
+
+  <section class="slide s3">
+    <svg class="line" style="transition-delay:.3s" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M8 22a4 4 0 0 1 4-4h8l4-6h16l4 6h8a4 4 0 0 1 4 4v26a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4z"/>
+      <circle cx="32" cy="34" r="10"/>
+    </svg>
+    <p class="line" style="transition-delay:.9s">nanti setelah ujian bisa minta waktunya bentar buat foto? aku selalu ingin mengabadikan semua moment spesial sama kamu</p>
+  </section>
+</main>
+
+<nav class="nav hide" id="nav">
+  <button id="prev" aria-label="sebelumnya">&#8249;</button>
+  <div class="dots" id="dots"><i class="on"></i><i></i><i></i></div>
+  <button id="next" aria-label="selanjutnya">&#8250;</button>
+</nav>
+
+<script>
+{
+  const slides=[...document.querySelectorAll('.slide')];
+  const dots=[...document.querySelectorAll('#dots i')];
+  const nav=document.getElementById('nav'),prev=document.getElementById('prev'),next=document.getElementById('next');
+  let cur=0;
+  const go=n=>{
+    if(n<0||n>=slides.length||n===cur)return;
+    slides[cur].classList.remove('on');cur=n;slides[cur].classList.add('on');
+    dots.forEach((d,i)=>d.classList.toggle('on',i===cur));
+    nav.classList.toggle('hide',cur===0);
+    prev.disabled=cur===0;next.disabled=cur===slides.length-1;
+  };
+  document.getElementById('tap').addEventListener('click',()=>go(1));
+  prev.addEventListener('click',()=>go(cur-1));
+  next.addEventListener('click',()=>go(cur+1));
+  addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
+  let sx=null;
+  addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+  addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>60&&cur>0)go(cur+(dx<0?1:-1))});
+}
+</script>
+</body>
+</html>
